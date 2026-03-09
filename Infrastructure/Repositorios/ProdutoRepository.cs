@@ -11,7 +11,7 @@ namespace Infrastructure.Repositorios
             using var conn = connectionFactory.CreateConnection();
             conn.Open();
             var rows = await conn.ExecuteAsync(
-                "INSERT INTO Produtos (ProdutoTitulo, ProdutoDescricao, ProdutoValor, ProdutoCodigo) VALUES (@ProdutoId, @ProdutoTitulo, @ProdutoDescricao, @ProdutoValor, @ProdutoCodigo)",
+                "INSERT INTO Produtos (ProdutoTitulo, ProdutoDescricao, ProdutoValor, ProdutoEstoque, ProdutoCodigo) VALUES (@ProdutoId, @ProdutoTitulo, @ProdutoDescricao, @ProdutoValor, @ProdutoEstoque, @ProdutoCodigo)",
                 produto);
 
             return rows > 0;
