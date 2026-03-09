@@ -6,7 +6,15 @@ namespace Infrastructure.Repositorios
 {
     public class ProdutoRepository(IDbConnectionFactory connectionFactory) : IProdutoRepository
     {
-        public async Task<bool> AdicionarProduto(Produtos produto)
+        public async Task<IEnumerable<Produtos>> BuscarTodosProdutosAsync()
+        {
+            using var conn = connectionFactory.CreateConnection();
+            conn.Open();
+            return await conn.QueryAsync<Produtos>(
+                "SELECT * FROM Produtos");
+        }
+
+        public async Task<bool> AdicionarProdutoAsync(Produtos produto)
         {
             using var conn = connectionFactory.CreateConnection();
             conn.Open();

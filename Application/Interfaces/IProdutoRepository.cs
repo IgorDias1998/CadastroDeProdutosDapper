@@ -4,6 +4,7 @@ namespace Application.Interfaces
 {
     public interface IProdutoRepository
     {
-        public Task<bool> AdicionarProduto(Produtos produto);
+        public Task<IEnumerable<Produtos>> BuscarTodosProdutosAsync();
+        public Task<bool> AdicionarProdutoAsync(Produtos produto);
     }
 }
