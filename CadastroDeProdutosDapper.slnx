@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="CadastroDeProdutosDapper/CadastroDeProdutosDapper.csproj" />
+  <Project Path="Application/Application.csproj" />
+  <Project Path="CadastroProdutosApi/CadastroProdutosApi.csproj" />
+  <Project Path="Domain/Domain.csproj" />
+  <Project Path="Infrastructure/Infrastructure.csproj" />
 </Solution>
