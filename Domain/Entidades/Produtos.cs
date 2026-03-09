@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Entidades
+﻿namespace Domain.Entidades
 {
-    internal class Produtos
+    public class Produtos
     {
+        public Guid ProdutoId { get; set; }
+        public string ProdutoTitulo { get; set; } = string.Empty;
+        public string ProdutoDescricao { get; set; } = string.Empty;
+        public decimal ProdutoValor { get; set; }
+        public string ProdutoCodigo { get; set; } = string.Empty;
     }
 }
