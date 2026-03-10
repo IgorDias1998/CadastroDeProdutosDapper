@@ -14,15 +14,20 @@ namespace Infrastructure.Repositorios
                 "SELECT * FROM Produtos");
         }
 
-        public async Task<bool> AdicionarProdutoAsync(Produtos produto)
+        public async Task<Produtos> AdicionarProdutoAsync(Produtos produto)
         {
             using var conn = connectionFactory.CreateConnection();
             conn.Open();
-            var rows = await conn.ExecuteAsync(
-                "INSERT INTO Produtos (ProdutoTitulo, ProdutoDescricao, ProdutoValor, ProdutoEstoque, ProdutoCodigo) VALUES (@ProdutoId, @ProdutoTitulo, @ProdutoDescricao, @ProdutoValor, @ProdutoEstoque, @ProdutoCodigo)",
+            var id = await conn.ExecuteScalarAsync<int>(
+                @"INSERT INTO Produtos
+                (ProdutoTitulo, ProdutoDescricao, ProdutoValor, ProdutoEstoque, ProdutoCodigo)
+                VALUES(@ProdutoTitulo, @ProdutoDescricao, @ProdutoValor, @ProdutoEstoque, @ProdutoCodigo);    
+                SELECT CAST(SCOPE_IDENTITY() as int);",
                 produto);
 
-            return rows > 0;
+            produto.ProdutoId = id;
+
+            return produto;
         }
     }
 }
