@@ -12,6 +12,12 @@ namespace Application.Services
             _repository = repository;
         }
 
+        public async Task<Produtos> BuscarProdutoPorIdAsync(int id)
+        {
+            var produto = await _repository.BuscarProdutoPorIdAsync(id);
+            return produto;
+        }
+
         public async Task<IEnumerable<Produtos>> BuscarTodosProdutosAsync()
         {
             var produtos = await _repository.BuscarTodosProdutosAsync();

@@ -17,6 +17,13 @@ namespace CadastroProdutosApi.Controllers
             _services = services;
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<Produtos> BuscarProdutosPorIdAsync(int id)
+        {
+            var produto = await _services.BuscarProdutoPorIdAsync(id);
+            return produto;
+        }
+
         [HttpGet]
         public async Task<IEnumerable<Produtos>> BuscarTodosProdutosAsync()
         {
