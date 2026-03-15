@@ -38,5 +38,33 @@ namespace Infrastructure.Repositorios
 
             return produto;
         }
+
+        public async Task<Produtos> AtualizarProdutoAsync(Produtos produto)
+        {
+            using var conn = connectionFactory.CreateConnection();
+            conn.Open();
+            await conn.ExecuteAsync(
+                @"UPDATE Produtos
+                        SET ProdutoTitulo = @ProdutoTitulo,
+                            ProdutoDescricao = @ProdutoDescricao,
+                            ProdutoValor = @ProdutoValor,
+                            ProdutoCodigo = @ProdutoCodigo,
+                            ProdutoEstoque = @ProdutoEstoque
+                            WHERE Id = @ProdutoId",
+                            produto);
+            return produto;
+        }
+
+        public async Task<bool> DeletarProdutoAsync(int id)
+        {
+            using var conn = connectionFactory.CreateConnection();
+            conn.Open();
+
+            var rows = await conn.ExecuteAsync(
+                @"DELETE FROM PRODUTOS WHERE Id = @id",
+                new { Id = id });
+
+            return rows > 0;
+        }
     }
 }

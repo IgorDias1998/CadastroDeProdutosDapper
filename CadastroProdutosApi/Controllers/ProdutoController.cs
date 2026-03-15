@@ -37,5 +37,26 @@ namespace CadastroProdutosApi.Controllers
             var produtoAdicionado = await _services.AdicionarProdutoAsync(produto);
             return produtoAdicionado;
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> AtualizarProdutoAsync(int id, [FromBody] Produtos produtoAtualizado)
+        {
+            var produto = await _services.AtualizarProdutoAsync(id, produtoAtualizado);
+            return Ok(produto);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<bool> DeletarProdutoAsync(int id)
+        {
+            var produtoEncontrado = await _services.BuscarProdutoPorIdAsync(id);
+
+            if (produtoEncontrado == null)
+            {
+                return false;
+            }
+
+            var produtoDeletedo = await _services.DeletarProdutoAsync(produtoEncontrado.ProdutoId);
+            return produtoDeletedo;
+        }
     }
 }
